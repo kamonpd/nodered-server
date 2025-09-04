@@ -1,0 +1,251 @@
+[
+    {
+        "id": "function-temp",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "แยก temp",
+        "func": "msg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 180,
+        "wires": [
+            [
+                "gauge-temp",
+                "chart-temp",
+                "82457b99e28a4cb4"
+            ]
+        ]
+    },
+    {
+        "id": "function-hum",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "แยก hum",
+        "func": "msg.payload = msg.payload.hum;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "gauge-hum",
+                "chart-hum",
+                "6ad29b435d9b61d5"
+            ]
+        ]
+    },
+    {
+        "id": "gauge-temp",
+        "type": "ui_gauge",
+        "z": "f6f2187d.f17ca8",
+        "name": "อุณหภูมิ",
+        "group": "ui-group",
+        "order": 2,
+        "width": 3,
+        "height": 3,
+        "gtype": "wave",
+        "title": "Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 50,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 660,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "gauge-hum",
+        "type": "ui_gauge",
+        "z": "f6f2187d.f17ca8",
+        "name": "ความชื้น",
+        "group": "ui-group",
+        "order": 3,
+        "width": 3,
+        "height": 3,
+        "gtype": "donut",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#00bfff",
+            "#60d0ff",
+            "#0066cc"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 660,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "chart-temp",
+        "type": "ui_chart",
+        "z": "f6f2187d.f17ca8",
+        "name": "กราฟอุณหภูมิ",
+        "group": "ui-group",
+        "order": 1,
+        "width": 9,
+        "height": 5,
+        "label": "Temperature Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "ไม่มีข้อมูล",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "50",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#ff6600"
+        ],
+        "outputs": 1,
+        "x": 660,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "chart-hum",
+        "type": "ui_chart",
+        "z": "f6f2187d.f17ca8",
+        "name": "กราฟความชื้น",
+        "group": "ui-group",
+        "order": 4,
+        "width": 9,
+        "height": 5,
+        "label": "Humidity Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "ไม่มีข้อมูล",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "24",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#3399ff"
+        ],
+        "outputs": 1,
+        "x": 660,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "303b82c3f5b8f932",
+        "type": "http response",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 310,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "876132fa4c4e9aee",
+        "type": "http in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "url": "/sensor",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "function-temp",
+                "function-hum",
+                "303b82c3f5b8f932"
+            ]
+        ]
+    },
+    {
+        "id": "82457b99e28a4cb4",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6ad29b435d9b61d5",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ui-group",
+        "type": "ui_group",
+        "name": "DHT22 Sensor",
+        "tab": "ui-tab",
+        "order": 1,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ui-tab",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a3f95351cf069411",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
