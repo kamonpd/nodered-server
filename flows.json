@@ -2,7 +2,7 @@
     {
         "id": "function-temp",
         "type": "function",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "แยก temp",
         "func": "msg.payload = msg.payload.temp;\nreturn msg;",
         "outputs": 1,
@@ -20,7 +20,7 @@
     {
         "id": "function-hum",
         "type": "function",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "แยก hum",
         "func": "msg.payload = msg.payload.hum;\nreturn msg;",
         "outputs": 1,
@@ -38,7 +38,7 @@
     {
         "id": "gauge-temp",
         "type": "ui_gauge",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "อุณหภูมิ",
         "group": "d9ea74cfac232de0",
         "order": 1,
@@ -66,7 +66,7 @@
     {
         "id": "gauge-hum",
         "type": "ui_gauge",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "ความชื้น",
         "group": "d9ea74cfac232de0",
         "order": 2,
@@ -94,7 +94,7 @@
     {
         "id": "chart-temp",
         "type": "ui_chart",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "กราฟอุณหภูมิ",
         "group": "d9ea74cfac232de0",
         "order": 22,
@@ -138,7 +138,7 @@
     {
         "id": "chart-hum",
         "type": "ui_chart",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "กราฟความชื้น",
         "group": "d9ea74cfac232de0",
         "order": 23,
@@ -182,7 +182,7 @@
     {
         "id": "303b82c3f5b8f932",
         "type": "http response",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -193,7 +193,7 @@
     {
         "id": "876132fa4c4e9aee",
         "type": "http in",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "",
         "url": "/sensor",
         "method": "post",
@@ -213,7 +213,7 @@
     {
         "id": "82457b99e28a4cb4",
         "type": "debug",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "debug 1",
         "active": true,
         "tosidebar": true,
@@ -229,7 +229,7 @@
     {
         "id": "6ad29b435d9b61d5",
         "type": "debug",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "debug 2",
         "active": true,
         "tosidebar": true,
@@ -245,7 +245,7 @@
     {
         "id": "http_in_sensor",
         "type": "http in",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "POST /sensor",
         "url": "/sensor",
         "method": "post",
@@ -262,7 +262,7 @@
     {
         "id": "function_store_sensor",
         "type": "function",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "Store Sensor Data",
         "func": "// เก็บ sensor data ใน context หรือ debug\nlet payload = msg.payload;\nnode.warn(payload); // แสดง debug\nmsg.payload = payload;\nreturn msg;",
         "outputs": 1,
@@ -279,7 +279,7 @@
     {
         "id": "http_response_sensor",
         "type": "http response",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -290,7 +290,7 @@
     {
         "id": "debug_sensor",
         "type": "debug",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "Sensor Debug",
         "active": true,
         "tosidebar": true,
@@ -304,7 +304,7 @@
     {
         "id": "function_set_led",
         "type": "function",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "Set LED State",
         "func": "global.set(\"ledState\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -324,7 +324,7 @@
     {
         "id": "debug_led",
         "type": "debug",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "LED State Debug",
         "active": true,
         "tosidebar": true,
@@ -338,7 +338,7 @@
     {
         "id": "http_in_control",
         "type": "http in",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "GET /control",
         "url": "/control",
         "method": "get",
@@ -355,7 +355,7 @@
     {
         "id": "function_get_led",
         "type": "function",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "Return LED State",
         "func": "let ledState = global.get(\"ledState\") || \"OFF\";\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.payload = { led: ledState };\nreturn msg;",
         "outputs": 1,
@@ -375,7 +375,7 @@
     {
         "id": "http_response_control",
         "type": "http response",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -386,7 +386,7 @@
     {
         "id": "f6d2288cefd4d20a",
         "type": "ui_switch",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "",
         "label": "ON/OFF",
         "tooltip": "",
@@ -420,7 +420,7 @@
     {
         "id": "74acdfd12a027f0c",
         "type": "ui_numeric",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "",
         "label": "Temp ON",
         "tooltip": "",
@@ -446,7 +446,7 @@
     {
         "id": "06b6f8ed62af3f9f",
         "type": "ui_numeric",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "",
         "label": "Hum ON",
         "tooltip": "",
@@ -472,7 +472,7 @@
     {
         "id": "cce6835834f090b2",
         "type": "ui_numeric",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "",
         "label": "Temp OFF",
         "tooltip": "",
@@ -498,7 +498,7 @@
     {
         "id": "72771fe3b5727678",
         "type": "ui_numeric",
-        "z": "749a02c984204776",
+        "z": "0b73e0c8e5f74f84",
         "name": "",
         "label": "Hum OFF",
         "tooltip": "",
@@ -541,7 +541,7 @@
         "hidden": false
     },
     {
-        "id": "0b30b83559d8f6dc",
+        "id": "58e95cacc1e759c3",
         "type": "global-config",
         "env": [],
         "modules": {
