@@ -2,7 +2,7 @@
     {
         "id": "function-temp",
         "type": "function",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "แยก temp",
         "func": "msg.payload = msg.payload.temp;\nreturn msg;",
         "outputs": 1,
@@ -19,7 +19,7 @@
     {
         "id": "function-hum",
         "type": "function",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "แยก hum",
         "func": "msg.payload = msg.payload.hum;\nreturn msg;",
         "outputs": 1,
@@ -36,12 +36,12 @@
     {
         "id": "gauge-temp",
         "type": "ui_gauge",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "อุณหภูมิ",
         "group": "d9ea74cfac232de0",
         "order": 1,
         "width": 3,
-        "height": 4,
+        "height": 2,
         "gtype": "wave",
         "title": "Temperature",
         "label": "°C",
@@ -64,12 +64,12 @@
     {
         "id": "gauge-hum",
         "type": "ui_gauge",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "ความชื้น",
         "group": "d9ea74cfac232de0",
         "order": 2,
         "width": 3,
-        "height": 4,
+        "height": 2,
         "gtype": "donut",
         "title": "Humidity",
         "label": "%",
@@ -92,11 +92,11 @@
     {
         "id": "chart-temp",
         "type": "ui_chart",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "กราฟอุณหภูมิ",
         "group": "d9ea74cfac232de0",
-        "order": 22,
-        "width": 12,
+        "order": 8,
+        "width": 11,
         "height": 5,
         "label": "Temperature Chart",
         "chartType": "line",
@@ -136,11 +136,11 @@
     {
         "id": "chart-hum",
         "type": "ui_chart",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "กราฟความชื้น",
         "group": "d9ea74cfac232de0",
-        "order": 23,
-        "width": 12,
+        "order": 9,
+        "width": 10,
         "height": 5,
         "label": "Humidity Chart",
         "chartType": "line",
@@ -180,7 +180,7 @@
     {
         "id": "303b82c3f5b8f932",
         "type": "http response",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -191,7 +191,7 @@
     {
         "id": "876132fa4c4e9aee",
         "type": "http in",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "",
         "url": "/sensor",
         "method": "post",
@@ -212,7 +212,7 @@
     {
         "id": "http_in_sensor",
         "type": "http in",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "POST /sensor",
         "url": "/sensor",
         "method": "post",
@@ -229,7 +229,7 @@
     {
         "id": "function_store_sensor",
         "type": "function",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "Store Sensor Data",
         "func": "// เก็บ sensor data ใน context หรือ debug\nlet payload = msg.payload;\nnode.warn(payload); // แสดง debug\nmsg.payload = payload;\nreturn msg;",
         "outputs": 1,
@@ -246,7 +246,7 @@
     {
         "id": "http_response_sensor",
         "type": "http response",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -257,7 +257,7 @@
     {
         "id": "debug_sensor",
         "type": "debug",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "Sensor Debug",
         "active": true,
         "tosidebar": true,
@@ -271,7 +271,7 @@
     {
         "id": "function_set_led",
         "type": "function",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "Set LED State",
         "func": "global.set(\"ledState\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -291,7 +291,7 @@
     {
         "id": "debug_led",
         "type": "debug",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "LED State Debug",
         "active": true,
         "tosidebar": true,
@@ -305,7 +305,7 @@
     {
         "id": "http_in_control",
         "type": "http in",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "GET /control",
         "url": "/control",
         "method": "get",
@@ -322,7 +322,7 @@
     {
         "id": "function_get_led",
         "type": "function",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "Return LED State",
         "func": "let ledState = global.get(\"ledState\") || \"OFF\";\nlet ton = global.get(\"ton\") || 30;\nlet toff = global.get(\"toff\") || 28;\nlet hon = global.get(\"hon\") || 70;\nlet hoff = global.get(\"hoff\") || 64;\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.payload = { led: ledState, \n                ton: ton,\n                toff: toff,\n                hon: hon,\n                hoff: hoff };\nreturn msg;",
         "outputs": 1,
@@ -342,7 +342,7 @@
     {
         "id": "http_response_control",
         "type": "http response",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -353,12 +353,12 @@
     {
         "id": "f6d2288cefd4d20a",
         "type": "ui_switch",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "",
         "label": "ON/OFF",
         "tooltip": "",
         "group": "d9ea74cfac232de0",
-        "order": 9,
+        "order": 3,
         "width": 3,
         "height": 2,
         "passthru": true,
@@ -387,7 +387,7 @@
     {
         "id": "74acdfd12a027f0c",
         "type": "ui_numeric",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "",
         "label": "Temp ON",
         "tooltip": "",
@@ -415,7 +415,7 @@
     {
         "id": "06b6f8ed62af3f9f",
         "type": "ui_numeric",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "",
         "label": "Hum ON",
         "tooltip": "",
@@ -443,12 +443,12 @@
     {
         "id": "cce6835834f090b2",
         "type": "ui_numeric",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "",
         "label": "Temp OFF",
         "tooltip": "",
         "group": "d9ea74cfac232de0",
-        "order": 15,
+        "order": 5,
         "width": 3,
         "height": 2,
         "wrap": false,
@@ -471,12 +471,12 @@
     {
         "id": "72771fe3b5727678",
         "type": "ui_numeric",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "",
         "label": "Hum OFF",
         "tooltip": "",
         "group": "d9ea74cfac232de0",
-        "order": 17,
+        "order": 7,
         "width": 3,
         "height": 2,
         "wrap": false,
@@ -499,7 +499,7 @@
     {
         "id": "51c69bf5415cfc9b",
         "type": "function",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "ton",
         "func": "global.set(\"ton\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -519,7 +519,7 @@
     {
         "id": "6744e4e7528280ca",
         "type": "function",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "toff",
         "func": "global.set(\"toff\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -539,7 +539,7 @@
     {
         "id": "b075f2a5d3e485df",
         "type": "function",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "hon",
         "func": "global.set(\"hon\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -559,7 +559,7 @@
     {
         "id": "c446c55f8de88e48",
         "type": "function",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "hoff",
         "func": "global.set(\"hoff\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -579,7 +579,7 @@
     {
         "id": "12f4e73009991cda",
         "type": "debug",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "debug 3",
         "active": true,
         "tosidebar": true,
@@ -595,7 +595,7 @@
     {
         "id": "9c623659ce15a638",
         "type": "debug",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "debug 4",
         "active": true,
         "tosidebar": true,
@@ -611,7 +611,7 @@
     {
         "id": "d87bcc4a453a82c2",
         "type": "debug",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "debug 5",
         "active": true,
         "tosidebar": true,
@@ -627,7 +627,7 @@
     {
         "id": "ed74c43054eabb05",
         "type": "debug",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "debug 6",
         "active": true,
         "tosidebar": true,
@@ -643,7 +643,7 @@
     {
         "id": "89a053bbddf2e701",
         "type": "debug",
-        "z": "bed6fa76a4f5b436",
+        "z": "8b300c4acb54ed3d",
         "name": "debug 1",
         "active": true,
         "tosidebar": true,
@@ -663,7 +663,7 @@
         "tab": "3278a476dfbab52a",
         "order": 1,
         "disp": true,
-        "width": 24,
+        "width": 21,
         "collapse": false,
         "className": ""
     },
@@ -676,7 +676,7 @@
         "hidden": false
     },
     {
-        "id": "3d28ef8bca65e7ae",
+        "id": "bc5d66cccfa66c86",
         "type": "global-config",
         "env": [],
         "modules": {
