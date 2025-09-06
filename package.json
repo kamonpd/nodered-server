@@ -1,1 +1,7 @@
-"node-red-dashboard"
+{
+  "name": "node-red-project",
+  "description": "Node-RED on Render",
+  "dependencies": {
+    "node-red-dashboard": "^3.0.4"
+  }
+}
