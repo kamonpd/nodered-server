@@ -2,7 +2,7 @@
     {
         "id": "function-temp",
         "type": "function",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "แยก temp",
         "func": "msg.payload = msg.payload.temp;\nreturn msg;",
         "outputs": 1,
@@ -20,7 +20,7 @@
     {
         "id": "function-hum",
         "type": "function",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "แยก hum",
         "func": "msg.payload = msg.payload.hum;\nreturn msg;",
         "outputs": 1,
@@ -38,7 +38,7 @@
     {
         "id": "gauge-temp",
         "type": "ui_gauge",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "อุณหภูมิ",
         "group": "ui-group",
         "order": 2,
@@ -66,7 +66,7 @@
     {
         "id": "gauge-hum",
         "type": "ui_gauge",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "ความชื้น",
         "group": "ui-group",
         "order": 3,
@@ -94,7 +94,7 @@
     {
         "id": "chart-temp",
         "type": "ui_chart",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "กราฟอุณหภูมิ",
         "group": "ui-group",
         "order": 1,
@@ -127,7 +127,7 @@
     {
         "id": "chart-hum",
         "type": "ui_chart",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "กราฟความชื้น",
         "group": "ui-group",
         "order": 4,
@@ -160,7 +160,7 @@
     {
         "id": "303b82c3f5b8f932",
         "type": "http response",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -171,7 +171,7 @@
     {
         "id": "876132fa4c4e9aee",
         "type": "http in",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "",
         "url": "/sensor",
         "method": "post",
@@ -191,7 +191,7 @@
     {
         "id": "82457b99e28a4cb4",
         "type": "debug",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "debug 1",
         "active": true,
         "tosidebar": true,
@@ -200,14 +200,14 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 580,
-        "y": 80,
+        "x": 600,
+        "y": 100,
         "wires": []
     },
     {
         "id": "6ad29b435d9b61d5",
         "type": "debug",
-        "z": "f6f2187d.f17ca8",
+        "z": "35bd0a5d5be58773",
         "name": "debug 2",
         "active": true,
         "tosidebar": true,
@@ -221,31 +221,188 @@
         "wires": []
     },
     {
-        "id": "ui-group",
-        "type": "ui_group",
-        "name": "DHT22 Sensor",
-        "tab": "ui-tab",
-        "order": 1,
-        "disp": true,
-        "width": 12,
-        "collapse": false,
-        "className": ""
+        "id": "http_in_sensor",
+        "type": "http in",
+        "z": "35bd0a5d5be58773",
+        "name": "POST /sensor",
+        "url": "/sensor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 480,
+        "wires": [
+            [
+                "function_store_sensor"
+            ]
+        ]
     },
     {
-        "id": "ui-tab",
-        "type": "ui_tab",
-        "name": "Home",
-        "icon": "dashboard",
-        "order": 1,
-        "disabled": false,
-        "hidden": false
+        "id": "function_store_sensor",
+        "type": "function",
+        "z": "35bd0a5d5be58773",
+        "name": "Store Sensor Data",
+        "func": "// เก็บ sensor data ใน context หรือ debug\nlet payload = msg.payload;\nnode.warn(payload); // แสดง debug\nmsg.payload = payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 480,
+        "wires": [
+            [
+                "http_response_sensor",
+                "debug_sensor"
+            ]
+        ]
     },
     {
-        "id": "a3f95351cf069411",
-        "type": "global-config",
-        "env": [],
-        "modules": {
-            "node-red-dashboard": "3.6.6"
-        }
+        "id": "http_response_sensor",
+        "type": "http response",
+        "z": "35bd0a5d5be58773",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "debug_sensor",
+        "type": "debug",
+        "z": "35bd0a5d5be58773",
+        "name": "Sensor Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 650,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "ui_button_on",
+        "type": "ui_button",
+        "z": "35bd0a5d5be58773",
+        "name": "LED ON",
+        "group": "dashboard_group",
+        "order": 1,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "topic": "",
+        "x": 210,
+        "y": 620,
+        "wires": [
+            [
+                "function_set_led"
+            ]
+        ]
+    },
+    {
+        "id": "ui_button_off",
+        "type": "ui_button",
+        "z": "35bd0a5d5be58773",
+        "name": "LED OFF",
+        "group": "dashboard_group",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "OFF",
+        "payloadType": "str",
+        "topic": "",
+        "x": 210,
+        "y": 660,
+        "wires": [
+            [
+                "function_set_led"
+            ]
+        ]
+    },
+    {
+        "id": "function_set_led",
+        "type": "function",
+        "z": "35bd0a5d5be58773",
+        "name": "Set LED State",
+        "func": "global.set(\"ledState\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 640,
+        "wires": [
+            [
+                "debug_led"
+            ]
+        ]
+    },
+    {
+        "id": "debug_led",
+        "type": "debug",
+        "z": "35bd0a5d5be58773",
+        "name": "LED State Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 650,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "http_in_control",
+        "type": "http in",
+        "z": "35bd0a5d5be58773",
+        "name": "GET /control",
+        "url": "/control",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 560,
+        "wires": [
+            [
+                "function_get_led"
+            ]
+        ]
+    },
+    {
+        "id": "function_get_led",
+        "type": "function",
+        "z": "35bd0a5d5be58773",
+        "name": "Return LED State",
+        "func": "let ledState = global.get(\"ledState\") || \"OFF\";\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.payload = { led: ledState };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 560,
+        "wires": [
+            [
+                "http_response_control"
+            ]
+        ]
+    },
+    {
+        "id": "http_response_control",
+        "type": "http response",
+        "z": "35bd0a5d5be58773",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 560,
+        "wires": []
     }
 ]
