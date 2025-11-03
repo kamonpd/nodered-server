@@ -29,7 +29,7 @@
         "type": "function",
         "z": "327f0879cefce6aa",
         "name": "แยก hum",
-        "func": "// ปกติในแยก hum คุณมี msg.payload = msg.payload.hum;\nlet hum = msg.payload.hum;\nmsg.payload = msg.payload.hum;\n\n// ดึงค่าปัจจุบันของ temp on (ton)\nlet ton = global.get(\"ton\") || 30;\nlet tonh = ton;\n\n// ถ้าความชื้น > 70 ให้ลดค่า temp on ลง 0.2\nif (hum > 73) {\n    tonh = ton - 0.6;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 75% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 70) {\n    tonh = ton - 0.4;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 70% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 68) {\n    tonh = ton - 0.2;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 65% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nreturn msg;   // ส่งค่าความชื้นต่อไปใช้กับเกจ/กราฟ\n",
+        "func": "// ปกติในแยก hum คุณมี msg.payload = msg.payload.hum;\nlet hum = msg.payload.hum;\nmsg.payload = msg.payload.hum;\n\n// ดึงค่าปัจจุบันของ temp on (ton)\nlet ton = global.get(\"ton\") || 29.8;\nlet tonh = ton;\n\n// ถ้าความชื้น > 70 ให้ลดค่า temp on ลง 0.2\nif (hum > 73) {\n    tonh = ton - 0.6;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 75% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 70) {\n    tonh = ton - 0.4;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 70% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 68) {\n    tonh = ton - 0.2;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 68% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nreturn msg;   // ส่งค่าความชื้นต่อไปใช้กับเกจ/กราฟ\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -342,7 +342,7 @@
         "type": "function",
         "z": "327f0879cefce6aa",
         "name": "Return LED State",
-        "func": "let ledState = global.get(\"ledState\") || \"OFF\";\nlet ton = global.get(\"ton\");\nlet toff = global.get(\"toff\");\nlet hon = global.get(\"hon\");\nlet hoff = global.get(\"hoff\");\nlet kauto = global.get(\"kauto\");\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.payload = { led: ledState, \n                ton: ton,\n                toff: toff,\n                hon: hon,\n                hoff: hoff,\n                kauto: kauto };\nreturn msg;",
+        "func": "let ledState = global.get(\"ledState\") || \"OFF\";\nlet ton = global.get(\"ton\")||29.8;\nlet toff = global.get(\"toff\")||27;\nlet hon = global.get(\"hon\");\nlet hoff = global.get(\"hoff\");\nlet kauto = global.get(\"kauto\");\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.payload = { led: ledState, \n                ton: ton,\n                toff: toff,\n                hon: hon,\n                hoff: hoff,\n                kauto: kauto };\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -781,7 +781,7 @@
         "hidden": false
     },
     {
-        "id": "4da9a32c7ab14fc1",
+        "id": "df8207970ecf6ed5",
         "type": "global-config",
         "env": [],
         "modules": {
