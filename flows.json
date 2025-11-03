@@ -1,8 +1,16 @@
 [
     {
+        "id": "327f0879cefce6aa",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "function-temp",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "แยก temp",
         "func": "msg.payload = msg.payload.temp;\nreturn msg;",
         "outputs": 1,
@@ -19,24 +27,29 @@
     {
         "id": "function-hum",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "แยก hum",
-        "func": "msg.payload = msg.payload.hum;\nreturn msg;",
+        "func": "// ปกติในแยก hum คุณมี msg.payload = msg.payload.hum;\nlet hum = msg.payload.hum;\nmsg.payload = msg.payload.hum;\n\n// ดึงค่าปัจจุบันของ temp on (ton)\nlet ton = global.get(\"ton\") || 30;\nlet tonh = ton;\n\n// ถ้าความชื้น > 70 ให้ลดค่า temp on ลง 0.2\nif (hum > 73) {\n    tonh = ton - 0.6;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 75% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 70) {\n    tonh = ton - 0.4;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 70% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 68) {\n    tonh = ton - 0.2;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 65% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nreturn msg;   // ส่งค่าความชื้นต่อไปใช้กับเกจ/กราฟ\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 380,
         "y": 140,
         "wires": [
             [
                 "gauge-hum",
-                "chart-hum"
+                "chart-hum",
+                "3681d68b30c4054e"
             ]
         ]
     },
     {
         "id": "gauge-temp",
         "type": "ui_gauge",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "อุณหภูมิ",
         "group": "d9ea74cfac232de0",
         "order": 1,
@@ -64,7 +77,7 @@
     {
         "id": "gauge-hum",
         "type": "ui_gauge",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "ความชื้น",
         "group": "d9ea74cfac232de0",
         "order": 2,
@@ -92,7 +105,7 @@
     {
         "id": "chart-temp",
         "type": "ui_chart",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "กราฟอุณหภูมิ",
         "group": "d9ea74cfac232de0",
         "order": 10,
@@ -136,7 +149,7 @@
     {
         "id": "chart-hum",
         "type": "ui_chart",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "กราฟความชื้น",
         "group": "d9ea74cfac232de0",
         "order": 9,
@@ -180,7 +193,7 @@
     {
         "id": "303b82c3f5b8f932",
         "type": "http response",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -191,7 +204,7 @@
     {
         "id": "876132fa4c4e9aee",
         "type": "http in",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "",
         "url": "/sensor",
         "method": "post",
@@ -212,7 +225,7 @@
     {
         "id": "http_in_sensor",
         "type": "http in",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "POST /sensor",
         "url": "/sensor",
         "method": "post",
@@ -229,11 +242,15 @@
     {
         "id": "function_store_sensor",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "Store Sensor Data",
         "func": "// เก็บ sensor data ใน context หรือ debug\nlet payload = msg.payload;\nnode.warn(payload); // แสดง debug\nmsg.payload = payload;\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 330,
         "y": 300,
         "wires": [
@@ -246,7 +263,7 @@
     {
         "id": "http_response_sensor",
         "type": "http response",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -257,7 +274,7 @@
     {
         "id": "debug_sensor",
         "type": "debug",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "Sensor Debug",
         "active": true,
         "tosidebar": true,
@@ -271,7 +288,7 @@
     {
         "id": "function_set_led",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "Set LED State",
         "func": "global.set(\"ledState\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -291,7 +308,7 @@
     {
         "id": "debug_led",
         "type": "debug",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "LED State Debug",
         "active": true,
         "tosidebar": true,
@@ -305,11 +322,12 @@
     {
         "id": "http_in_control",
         "type": "http in",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "GET /control",
         "url": "/control",
         "method": "get",
         "upload": false,
+        "skipBodyParsing": false,
         "swaggerDoc": "",
         "x": 110,
         "y": 400,
@@ -322,7 +340,7 @@
     {
         "id": "function_get_led",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "Return LED State",
         "func": "let ledState = global.get(\"ledState\") || \"OFF\";\nlet ton = global.get(\"ton\");\nlet toff = global.get(\"toff\");\nlet hon = global.get(\"hon\");\nlet hoff = global.get(\"hoff\");\nlet kauto = global.get(\"kauto\");\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.payload = { led: ledState, \n                ton: ton,\n                toff: toff,\n                hon: hon,\n                hoff: hoff,\n                kauto: kauto };\nreturn msg;",
         "outputs": 1,
@@ -342,7 +360,7 @@
     {
         "id": "http_response_control",
         "type": "http response",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -353,7 +371,7 @@
     {
         "id": "f6d2288cefd4d20a",
         "type": "ui_switch",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "",
         "label": "ON/OFF",
         "tooltip": "",
@@ -387,7 +405,7 @@
     {
         "id": "74acdfd12a027f0c",
         "type": "ui_numeric",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "",
         "label": "Temp ON",
         "tooltip": "",
@@ -415,7 +433,7 @@
     {
         "id": "06b6f8ed62af3f9f",
         "type": "ui_numeric",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "",
         "label": "Hum ON",
         "tooltip": "",
@@ -443,7 +461,7 @@
     {
         "id": "cce6835834f090b2",
         "type": "ui_numeric",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "",
         "label": "Temp OFF",
         "tooltip": "",
@@ -471,7 +489,7 @@
     {
         "id": "72771fe3b5727678",
         "type": "ui_numeric",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "",
         "label": "Hum OFF",
         "tooltip": "",
@@ -499,7 +517,7 @@
     {
         "id": "51c69bf5415cfc9b",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "ton",
         "func": "global.set(\"ton\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -519,7 +537,7 @@
     {
         "id": "6744e4e7528280ca",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "toff",
         "func": "global.set(\"toff\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -539,7 +557,7 @@
     {
         "id": "b075f2a5d3e485df",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "hon",
         "func": "global.set(\"hon\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -559,7 +577,7 @@
     {
         "id": "c446c55f8de88e48",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "hoff",
         "func": "global.set(\"hoff\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -579,7 +597,7 @@
     {
         "id": "12f4e73009991cda",
         "type": "debug",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "debug 3",
         "active": true,
         "tosidebar": true,
@@ -595,7 +613,7 @@
     {
         "id": "9c623659ce15a638",
         "type": "debug",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "debug 4",
         "active": true,
         "tosidebar": true,
@@ -611,7 +629,7 @@
     {
         "id": "d87bcc4a453a82c2",
         "type": "debug",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "debug 5",
         "active": true,
         "tosidebar": true,
@@ -627,7 +645,7 @@
     {
         "id": "ed74c43054eabb05",
         "type": "debug",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "debug 6",
         "active": true,
         "tosidebar": true,
@@ -643,7 +661,7 @@
     {
         "id": "89a053bbddf2e701",
         "type": "debug",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "debug 1",
         "active": true,
         "tosidebar": true,
@@ -659,7 +677,7 @@
     {
         "id": "8a452704d5460e98",
         "type": "ui_switch",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "Auto",
         "label": "Auto",
         "tooltip": "",
@@ -693,7 +711,7 @@
     {
         "id": "5d757d7086fb9c4c",
         "type": "function",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "auto",
         "func": "global.set(\"kauto\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -713,7 +731,7 @@
     {
         "id": "7ea496068115d489",
         "type": "debug",
-        "z": "a4c85175f0bbfc32",
+        "z": "327f0879cefce6aa",
         "name": "debug 2",
         "active": true,
         "tosidebar": true,
@@ -724,6 +742,23 @@
         "statusType": "auto",
         "x": 440,
         "y": 780,
+        "wires": []
+    },
+    {
+        "id": "3681d68b30c4054e",
+        "type": "debug",
+        "z": "327f0879cefce6aa",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 240,
         "wires": []
     },
     {
@@ -746,7 +781,7 @@
         "hidden": false
     },
     {
-        "id": "4874f002f86953d3",
+        "id": "4da9a32c7ab14fc1",
         "type": "global-config",
         "env": [],
         "modules": {
