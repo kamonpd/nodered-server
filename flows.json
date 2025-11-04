@@ -342,7 +342,7 @@
         "type": "function",
         "z": "327f0879cefce6aa",
         "name": "Return LED State",
-        "func": "let ledState = global.get(\"ledState\") || \"OFF\";\nlet ton = global.get(\"ton\")||29.8;\nlet toff = global.get(\"toff\")||27;\nlet hon = global.get(\"hon\");\nlet hoff = global.get(\"hoff\");\nlet kauto = global.get(\"kauto\");\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.payload = { led: ledState, \n                ton: ton,\n                toff: toff,\n                hon: hon,\n                hoff: hoff,\n                kauto: kauto };\nreturn msg;",
+        "func": "let ledState = global.get(\"ledState\") || \"OFF\";\nlet ton = global.get(\"tonh\")||29.8;\nlet toff = global.get(\"toff\")||27;\nlet hon = global.get(\"hon\");\nlet hoff = global.get(\"hoff\");\nlet kauto = global.get(\"kauto\");\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.payload = { led: ledState, \n                ton: ton,\n                toff: toff,\n                hon: hon,\n                hoff: hoff,\n                kauto: kauto };\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -781,7 +781,7 @@
         "hidden": false
     },
     {
-        "id": "df8207970ecf6ed5",
+        "id": "157685c6d7e2e35d",
         "type": "global-config",
         "env": [],
         "modules": {
