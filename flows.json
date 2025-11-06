@@ -29,7 +29,7 @@
         "type": "function",
         "z": "327f0879cefce6aa",
         "name": "แยก hum",
-        "func": "// ปกติในแยก hum คุณมี msg.payload = msg.payload.hum;\nlet hum = msg.payload.hum;\nmsg.payload = msg.payload.hum;\n\n// ดึงค่าปัจจุบันของ temp on (ton)\nlet ton = global.get(\"ton\") || 29.8;\nlet tonh = ton;\n\n// ถ้าความชื้น > 70 ให้ลดค่า temp on ลง 0.2\nif (hum > 73) {\n    tonh = ton - 0.6;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 75% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 70) {\n    tonh = ton - 0.4;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 70% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 68) {\n    tonh = ton - 0.2;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 68% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nreturn msg;   // ส่งค่าความชื้นต่อไปใช้กับเกจ/กราฟ\n",
+        "func": "// ปกติในแยก hum คุณมี msg.payload = msg.payload.hum;\nlet hum = msg.payload.hum;\nmsg.payload = msg.payload.hum;\n\n\n// ดึงค่าปัจจุบันของ temp on (ton)\nlet ton = global.get(\"ton\") || 29.8;\nlet tonh = ton;\nglobal.set(\"tonh\", tonh);\n\n// ถ้าความชื้น > 70 ให้ลดค่า temp on ลง 0.2\nif (hum > 73) {\n    tonh = ton - 0.6;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 75% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 70) {\n    tonh = ton - 0.4;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 70% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nelse if (hum > 68) {\n    tonh = ton - 0.2;\n    global.set(\"tonh\", tonh);\n    node.warn(\"ความชื้นเกิน 68% ปรับ Temp ON ลงเป็น \" + tonh.toFixed(1));\n}\n\nreturn msg;   // ส่งค่าความชื้นต่อไปใช้กับเกจ/กราฟ\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -781,7 +781,7 @@
         "hidden": false
     },
     {
-        "id": "157685c6d7e2e35d",
+        "id": "661a26c7c80df618",
         "type": "global-config",
         "env": [],
         "modules": {
